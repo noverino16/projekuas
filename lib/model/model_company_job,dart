@@ -1,0 +1,77 @@
+// To parse this JSON data, do
+//
+//     final modelCompanyJob = modelCompanyJobFromJson(jsonString);
+
+import 'dart:convert';
+
+ModelCompanyJob modelCompanyJobFromJson(String str) => ModelCompanyJob.fromJson(json.decode(str));
+
+String modelCompanyJobToJson(ModelCompanyJob data) => json.encode(data.toJson());
+
+class ModelCompanyJob {
+    bool isSuccess;
+    String message;
+    List<Datum> data;
+
+    ModelCompanyJob({
+        required this.isSuccess,
+        required this.message,
+        required this.data,
+    });
+
+    factory ModelCompanyJob.fromJson(Map<String, dynamic> json) => ModelCompanyJob(
+        isSuccess: json["isSuccess"],
+        message: json["message"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "isSuccess": isSuccess,
+        "message": message,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    };
+}
+
+class Datum {
+    String id;
+    String namaJob;
+    String idPerusahaan;
+    String idKategori;
+    String jobType;
+    String salary;
+    String tentangPekerjaan;
+    String syarat;
+
+    Datum({
+        required this.id,
+        required this.namaJob,
+        required this.idPerusahaan,
+        required this.idKategori,
+        required this.jobType,
+        required this.salary,
+        required this.tentangPekerjaan,
+        required this.syarat,
+    });
+
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        namaJob: json["nama_job"],
+        idPerusahaan: json["id_perusahaan"],
+        idKategori: json["id_kategori"],
+        jobType: json["job_type"],
+        salary: json["salary"],
+        tentangPekerjaan: json["tentang_pekerjaan"],
+        syarat: json["syarat"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "nama_job": namaJob,
+        "id_perusahaan": idPerusahaan,
+        "id_kategori": idKategori,
+        "job_type": jobType,
+        "salary": salary,
+        "tentang_pekerjaan": tentangPekerjaan,
+        "syarat": syarat,
+    };
+}
